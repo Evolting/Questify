@@ -1,0 +1,193 @@
+Codex App có giao diện trực quan hơn, dễ quản lý project hơn, có thể chạy nhiều agent cùng lúc, xem thay đổi file rõ ràng và phù hợp hơn với người chưa quen terminal.
+1. Cài Codex App
+Đầu tiên, hãy tải và cài Codex App từ trang chính thức của OpenAI.
+Sau khi cài xong, mở Codex App và đăng nhập bằng tài khoản ChatGPT của bạn.
+Nếu có ChatGPT Plus hoặc Pro thì càng tốt, vì bạn sẽ có nhiều lượt dùng và sức mạnh xử lý tốt hơn.
+2. Tạo một project riêng
+Trước khi làm bất kỳ app nào, hãy tạo một thư mục riêng cho project.
+Ví dụ:
+aiempire-image-review-board
+Không nên để mọi thứ ngoài Desktop lộn xộn. Mỗi app, mỗi website, mỗi công cụ nên có một folder riêng.
+Sau đó mở folder đó trong Codex App.
+3. Chọn model mạnh
+Khi bắt đầu làm việc, hãy chọn model mới nhất và mạnh nhất mà Codex đang hỗ trợ.
+Không nên dùng model mini nếu bạn muốn build app nghiêm túc.
+Về mức suy luận, có thể hiểu đơn giản:
+- Medium: việc nhỏ, chỉnh nhanh.
+- High: nên dùng mặc định cho phần lớn công việc.
+- Extra High: dùng khi gặp lỗi khó hoặc cần sửa cấu trúc lớn.
+Nếu không chắc, cứ bắt đầu với High.
+4. Tạo file "AGENTS.md"
+Việc đầu tiên nên yêu cầu Codex làm là tạo file:
+AGENTS.md
+Đây là file hướng dẫn dành cho AI trong project.
+Nó giúp Codex hiểu:
+- Project này dùng để làm gì.
+- Đối tượng người dùng là ai.
+- Giao diện cần theo phong cách nào.
+- Công nghệ đang dùng.
+- Những điều không được tự ý thay đổi.
+- Cách báo cáo sau khi sửa code.
+Hiểu đơn giản: AGENTS.md là bộ luật làm việc cho Codex trong project đó.
+Prompt có thể dùng:
+Hãy tạo file AGENTS.md cho project này. Đây là file hướng dẫn dành cho AI agent. Hãy ghi rõ mục tiêu project, đối tượng người dùng, phong cách giao diện, quy tắc code, những điều không được tự ý thay đổi và cách báo cáo sau mỗi lần sửa.
+5. Tạo file "README.md"
+Tiếp theo, hãy tạo file:
+README.md
+File này dùng để mô tả project cho con người đọc.
+Nó nên có:
+- Project này là gì.
+- Mục tiêu của project.
+- Cách chạy project.
+- Công nghệ sử dụng.
+- Ghi chú quan trọng.
+Prompt có thể dùng:
+Hãy tạo file README.md cho project này. Nội dung gồm: project này là gì, mục tiêu, tính năng chính, công nghệ sử dụng, cách chạy local và các ghi chú quan trọng.
+6. Đừng bắt Codex code ngay
+Trước khi build app, không nên bảo Codex code ngay lập tức.
+Hãy yêu cầu Codex hỏi lại vài câu để làm rõ ý tưởng.
+Prompt nên dùng:
+Trước khi code, hãy hỏi tôi 4 câu ngắn gọn để làm rõ MVP, giao diện, dữ liệu và cách triển khai. Sau khi tôi trả lời, hãy lưu các quyết định vào AGENTS.md và README.md rồi mới bắt đầu build.
+Cách này giúp Codex hiểu đúng hơn và giảm lỗi khi build.
+7. Build MVP trước
+MVP là phiên bản đơn giản đầu tiên của app.
+Đừng yêu cầu app quá hoàn hảo ngay từ đầu. Hãy làm bản đủ dùng trước, sau đó test và nâng cấp dần.
+Quy trình nên là:
+Ý tưởng → hỏi lại để làm rõ → lưu vào tài liệu → build MVP → chạy thử → sửa lỗi → nâng cấp
+8. Dùng ảnh chụp màn hình để hướng dẫn Codex
+Khi giao diện bị xấu, app báo lỗi, hoặc bạn muốn Codex làm giống một mẫu nào đó, hãy chụp màn hình và gửi cho Codex.
+Ảnh chụp màn hình giúp Codex hiểu nhanh hơn rất nhiều so với mô tả bằng chữ.
+Có thể dùng ảnh để:
+- Chỉ lỗi giao diện.
+- Chỉ lỗi hiển thị.
+- Cho xem layout mẫu.
+- Cho xem app đang sai chỗ nào.
+- Cho xem thông báo lỗi.
+Prompt có thể dùng:
+Hãy phân tích ảnh chụp màn hình này, xác định lỗi giao diện hoặc lỗi chức năng, sau đó sửa trực tiếp trong codebase.
+9. Dùng web search khi cần thông tin mới
+Nếu project liên quan đến API, thư viện, framework hoặc nền tảng mới, hãy yêu cầu Codex tìm thông tin trên web.
+Ví dụ:
+Hãy dùng web search để kiểm tra tài liệu mới nhất của API này, sau đó cập nhật cách triển khai trong project.
+Không nên để Codex tự đoán khi làm việc với tài liệu kỹ thuật mới.
+10. Tạo folder "/docs" cho tài liệu quan trọng
+Nếu có tài liệu API, hướng dẫn kỹ thuật, quy định hoặc ghi chú quan trọng, hãy tạo folder:
+/docs
+Sau đó lưu tài liệu vào đó để Codex đọc.
+Ví dụ:
+Hãy tạo folder /docs và lưu tài liệu API này vào đó. Sau đó đọc tài liệu này, so sánh với code hiện tại và sửa lại cho đúng.
+Cách này rất hữu ích khi debug lỗi API.
+11. Chạy app local để test
+Sau khi Codex build xong, cần chạy app trên máy trước.
+Thông thường app sẽ chạy ở dạng:
+localhost:3000
+"localhost" nghĩa là app đang chạy trên máy của bạn, người khác chưa truy cập được.
+Khi test local, hãy kiểm tra:
+- App có mở được không.
+- Nút có bấm được không.
+- Giao diện có lỗi không.
+- Tính năng chính có hoạt động không.
+- Có lỗi nào trong console hoặc terminal không.
+12. Debug đúng cách
+Khi app lỗi, không nên chỉ nói:
+Nó bị lỗi, sửa đi.
+Cách tốt hơn là cung cấp đủ thông tin:
+- Ảnh chụp màn hình lỗi.
+- Nội dung lỗi trong terminal.
+- Nội dung lỗi trong console.
+- Bạn đã làm thao tác gì trước khi lỗi xảy ra.
+- Kết quả mong muốn là gì.
+Prompt nên dùng:
+Đây là ảnh lỗi và log lỗi. Hãy phân tích nguyên nhân, kiểm tra codebase, sửa lỗi và giải thích ngắn gọn bạn đã sửa gì.
+13. Luôn dùng Git
+Git giống như “điểm lưu game” cho code.
+Trước khi để Codex sửa nhiều thứ, hãy yêu cầu nó tạo Git repo và commit bản đầu tiên.
+Prompt nên dùng:
+Hãy khởi tạo Git cho project này, tạo file .gitignore phù hợp, stage toàn bộ file và tạo commit đầu tiên với message rõ ràng.
+Sau mỗi thay đổi quan trọng, tiếp tục commit.
+Nên commit khi:
+- App chạy được.
+- Sửa xong lỗi lớn.
+- Thêm tính năng mới.
+- Trước khi refactor.
+- Trước khi deploy.
+Prompt:
+Hãy kiểm tra thay đổi hiện tại, stage toàn bộ file phù hợp và tạo một git commit với message rõ ràng.
+14. Đưa code lên GitHub
+Sau khi app chạy ổn, hãy tạo repository trên GitHub rồi đưa link repo cho Codex.
+Prompt:
+Đây là GitHub repo mới của tôi: [dán link repo]. Hãy kết nối project hiện tại với repo này và push toàn bộ code lên GitHub.
+GitHub giúp:
+- Backup code.
+- Theo dõi lịch sử.
+- Chia sẻ với người khác.
+- Kết nối để deploy lên Vercel.
+15. Deploy lên Vercel
+Khi code đã lên GitHub, có thể deploy lên Vercel để app có link thật trên internet.
+Quy trình:
+1. Đăng nhập Vercel.
+2. Kết nối GitHub.
+3. Import project.
+4. Thêm environment variables nếu project có API key.
+5. Deploy.
+6. Mở link public để test.
+Sau bước này, app không còn chỉ chạy trên máy bạn nữa mà người khác có thể truy cập được.
+16. Bảo mật API key
+Nếu project dùng API key, không được đưa API key lên GitHub.
+API key nên được lưu trong file như:
+.env.local
+Và file này phải được chặn bằng ".gitignore".
+Cũng nên đặt giới hạn chi tiêu cho API key nếu dùng dịch vụ trả phí.
+17. Dùng multi-agent khi project lớn hơn
+Khi project bắt đầu phức tạp, có thể dùng nhiều agent cùng lúc trong Codex App.
+Ví dụ:
+- Một agent sửa giao diện.
+- Một agent sửa backend.
+- Một agent kiểm tra lỗi.
+- Một agent viết tài liệu.
+- Một agent review code.
+Cách này giúp làm nhanh hơn, nhưng phải dùng Git cẩn thận để tránh sửa chồng chéo.
+18. Dùng Skills, Automations và Sub-agents khi cần
+Khi đã quen hơn, có thể dùng thêm các tính năng nâng cao:
+Skills
+Là kỹ năng bổ sung cho Codex, ví dụ test trình duyệt, đọc docs, làm việc với GitHub.
+Automations
+Là tác vụ tự động chạy theo lịch, ví dụ mỗi ngày tóm tắt thay đổi code hoặc cập nhật tài liệu.
+Sub-agents
+Là agent phụ chạy nền để làm việc nhỏ, ví dụ thêm comment cho file, viết docs, kiểm tra lỗi format.
+Người mới chưa cần dùng ngay, nhưng nên biết đây là các tính năng giúp làm việc nhanh hơn khi project lớn.
+Quy trình chuẩn nên làm theo
+Tóm lại, khi dùng Codex để làm một project mới, chúng ta nên đi theo quy trình này:
+1. Cài và mở Codex App
+2. Tạo folder riêng cho project
+3. Mở project trong Codex App
+4. Chọn model mạnh và reasoning High
+5. Tạo AGENTS.md
+6. Tạo README.md
+7. Khởi tạo Git và .gitignore
+8. Mô tả ý tưởng app
+9. Bắt Codex hỏi lại vài câu trước khi code
+10. Lưu quyết định vào tài liệu
+11. Gửi ảnh layout hoặc ảnh lỗi nếu có
+12. Build MVP
+13. Chạy local để test
+14. Debug bằng ảnh, log và docs
+15. Commit thường xuyên
+16. Push code lên GitHub
+17. Deploy lên Vercel
+18. Test bản public
+19. Sau đó mới mở rộng bằng multi-agent, skills, automations và sub-agents
+Kết luận
+Dùng Codex hiệu quả không phải là mở lên rồi bảo nó “code app cho tôi”.
+Cách đúng là:
+Chuẩn bị project rõ ràng
+→ tạo tài liệu cho AI
+→ đưa đủ context bằng chữ, ảnh và docs
+→ build bản nhỏ trước
+→ test kỹ
+→ debug có bằng chứng
+→ lưu bằng Git
+→ đưa lên GitHub
+→ deploy lên Vercel
+→ sau đó mới mở rộng
+Nếu làm theo quy trình này, người mới vẫn có thể dùng Codex để tạo ra app thật, chạy được thật và đưa lên internet được.

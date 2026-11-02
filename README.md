@@ -1,44 +1,44 @@
-# 🎮 Questify — Project Overview
+# 🎮 Questify — Tổng quan dự án
 
-> **A Gamified Life & Skill-Tree Tracker built with React Native / React and Java Spring Boot Microservices.**
-
----
-
-## 📌 Executive Summary
-
-**Questify** is a productivity and habit-tracking application designed around **RPG (Role-Playing Game) gamification mechanics**. Instead of traditional, boring to-do lists, Questify turns personal development, health, learning, and productivity into an interactive game where the user is the main character. 
-
-The primary goal of building Questify is dual-fold:
-1. **Product Value:** Create an engaging, self-rewarding productivity tool that developers can actually use daily.
-2. **Technical Mastery:** Provide a realistic domain for implementing **Microservice Architecture, Event-Driven Systems, and Modern DevOps Pipelines** using **Java Spring Boot**, **React Native / React**, and **Kubernetes**.
+> **Ứng dụng theo dõi thói quen và kỹ năng được game hóa, xây dựng bằng React Native / React và các microservice Java Spring Boot.**
 
 ---
 
-## 🎯 Core Product Features
+## 📌 Tóm tắt dự án
 
-### 1. ⚔️ Quest System (Habits & Tasks)
-* **Quests:** Habits or tasks defined with difficulty levels (Easy, Medium, Hard).
-* **Categories:** Quests tied to specific domains (e.g., Coding, Fitness, Finance).
-* **Recurrence:** Daily, weekly, or custom scheduled tasks.
+**Questify** là ứng dụng theo dõi thói quen và hiệu suất cá nhân, sử dụng **cơ chế game hóa theo phong cách RPG (Role-Playing Game)**. Thay vì danh sách việc cần làm thông thường, Questify biến quá trình phát triển bản thân, chăm sóc sức khỏe, học tập và làm việc thành một trò chơi tương tác, nơi người dùng là nhân vật chính.
 
-### 2. 🌳 Skill-Tree & Leveling (XP System)
-* **Experience Points (XP):** Earned upon completing quests.
-* **Level Progression:** Dynamic leveling formula ($MaxXP = 100 \times Level^{1.5}$).
-* **Skill Trees:** Visual progression node graph representing growth in specific life areas (e.g., Java Proficiency, Running Distance).
-
-### 3. 🛍️ Custom Reward Shop (Gold Currency)
-* **Gold Earnings:** Earned alongside XP when finishing quests.
-* **Self-Reward System:** Users define their own real-life rewards and "Gold costs" (e.g., 500 Gold = *1 Movie Night*).
-* **Redemption Engine:** Transactional exchange of virtual currency for real-life breaks/rewards.
-
-### 4. 🛡️ Guilds & Leaderboards (Social Features)
-* **Guilds:** Join groups with friends for mutual accountability.
-* **Weekly Boss Fights:** Shared guild goals where missed personal habits damage the team.
-* **Leaderboards:** Real-time ranking of top XP earners among friends/guild members.
+Questify có hai mục tiêu chính:
+1. **Giá trị sản phẩm:** Tạo một công cụ quản lý hiệu suất hấp dẫn, có cơ chế tự thưởng và hữu ích cho việc sử dụng hằng ngày của developer.
+2. **Rèn luyện kỹ thuật:** Cung cấp một bài toán thực tế để triển khai **kiến trúc microservice, hệ thống hướng sự kiện và quy trình DevOps hiện đại** bằng **Java Spring Boot**, **React Native / React** và **Kubernetes**.
 
 ---
 
-## 🏗️ Architecture & Microservices Breakdown
+## 🎯 Tính năng chính
+
+### 1. ⚔️ Hệ thống Quest (thói quen và công việc)
+* **Quest:** Thói quen hoặc công việc với các mức độ khó (Dễ, Trung bình, Khó).
+* **Danh mục:** Gắn Quest với từng lĩnh vực (ví dụ: lập trình, thể chất, tài chính).
+* **Lặp lại:** Lên lịch hằng ngày, hằng tuần hoặc theo lịch tùy chỉnh.
+
+### 2. 🌳 Cây kỹ năng và lên cấp (hệ thống XP)
+* **Điểm kinh nghiệm (XP):** Nhận được khi hoàn thành Quest.
+* **Tiến trình lên cấp:** Áp dụng công thức $MaxXP = 100 \times Level^{1.5}$.
+* **Cây kỹ năng:** Biểu đồ các nút tiến trình thể hiện sự phát triển trong từng lĩnh vực (ví dụ: trình độ Java, quãng đường chạy).
+
+### 3. 🛍️ Cửa hàng phần thưởng tùy chỉnh (Gold)
+* **Kiếm Gold:** Nhận Gold cùng với XP khi hoàn thành Quest.
+* **Tự đặt phần thưởng:** Người dùng xác định phần thưởng ngoài đời và mức Gold cần để đổi (ví dụ: 500 Gold = *1 buổi xem phim*).
+* **Đổi thưởng:** Dùng tiền tệ ảo để đổi lấy thời gian nghỉ ngơi hoặc phần thưởng ngoài đời thông qua một giao dịch.
+
+### 4. 🛡️ Guild và bảng xếp hạng (tính năng xã hội)
+* **Guild:** Tham gia nhóm cùng bạn bè để hỗ trợ nhau duy trì cam kết.
+* **Đánh Boss hằng tuần:** Mục tiêu chung của Guild; việc bỏ lỡ thói quen cá nhân gây bất lợi cho cả nhóm.
+* **Bảng xếp hạng:** Xếp hạng theo XP theo thời gian thực giữa bạn bè và thành viên Guild.
+
+---
+
+## 🏗️ Kiến trúc và các microservice
 
 ```
                          +-------------------+
@@ -70,49 +70,49 @@ The primary goal of building Questify is dual-fold:
                           +-----------------+
 ```
 
-### Microservices
+### Các microservice
 
 1. **User & Gamification Service**
-   * Manages User profiles, XP calculations, Level progression logic, and Gold balances.
-   * *Database:* PostgreSQL
+   * Quản lý hồ sơ người dùng, tính XP, xử lý tiến trình lên cấp và số dư Gold.
+   * *Cơ sở dữ liệu:* PostgreSQL
 
 2. **Quest Engine Service**
-   * Handles quest creation, completion workflows, and recurring schedules.
-   * *Database:* PostgreSQL
+   * Xử lý việc tạo Quest, quy trình hoàn thành và lịch lặp lại.
+   * *Cơ sở dữ liệu:* PostgreSQL
 
 3. **Social & Guild Service**
-   * Manages friendships, guild chat, and real-time leaderboards.
-   * *Database:* Redis (for leaderboard caching) & PostgreSQL
+   * Quản lý quan hệ bạn bè, trò chuyện trong Guild và bảng xếp hạng theo thời gian thực.
+   * *Cơ sở dữ liệu:* Redis (lưu đệm bảng xếp hạng) và PostgreSQL
 
 4. **Notification Service**
-   * Asynchronously consumes events (e.g., Quest Completed, Level Up) and dispatches push/email notifications.
+   * Nhận các sự kiện theo cơ chế bất đồng bộ (ví dụ: hoàn thành Quest, lên cấp) và gửi thông báo đẩy hoặc email.
 
 ---
 
-## 🛠️ DevOps & Infrastructure Objectives
+## 🛠️ Mục tiêu DevOps và hạ tầng
 
-* **Containerization:** Dockerize all Spring Boot services and Frontend applications.
-* **Event-Driven Architecture:** Use **Apache Kafka** or **RabbitMQ** for decoupling inter-service communications (e.g., `QuestCompletedEvent`).
-* **API Gateway & Security:** **Spring Cloud Gateway** with **OAuth2 / JWT** security pattern.
-* **Orchestration:** Deploy using **Kubernetes** (Minikube/k3s) with Horizontal Pod Autoscaling (HPA).
-* **CI/CD Pipeline:** Automate testing, Docker building, vulnerability scanning (Trivy), and deployment via **GitHub Actions**.
-* **Observability:** Centralized logging with **ELK Stack / Loki** and metrics monitoring via **Prometheus & Grafana**.
+* **Đóng gói bằng container:** Dùng Docker cho tất cả service Spring Boot và ứng dụng frontend.
+* **Kiến trúc hướng sự kiện:** Dùng **Apache Kafka** hoặc **RabbitMQ** để giảm sự phụ thuộc trực tiếp trong giao tiếp giữa các service (ví dụ: `QuestCompletedEvent`).
+* **API Gateway và bảo mật:** Dùng **Spring Cloud Gateway** với mô hình bảo mật **OAuth2 / JWT**.
+* **Điều phối:** Triển khai bằng **Kubernetes** (Minikube/k3s) với Horizontal Pod Autoscaling (HPA).
+* **Quy trình CI/CD:** Tự động hóa kiểm thử, xây dựng Docker image, quét lỗ hổng bằng Trivy và triển khai qua **GitHub Actions**.
+* **Giám sát hệ thống:** Tập trung log bằng **ELK Stack / Loki** và theo dõi chỉ số bằng **Prometheus & Grafana**.
 
 ---
 
-## 🚀 Suggested Implementation Roadmap
+## 🚀 Lộ trình triển khai đề xuất
 
-1. **Phase 1: Modular Monolith MVP**
-   * Create the core domain (Quests, XP, Gold, Rewards) inside a single Spring Boot application.
-   * Build a basic React or React Native screen to interact with the API.
+1. **Giai đoạn 1: MVP dạng modular monolith**
+   * Xây dựng các domain cốt lõi (Quest, XP, Gold, phần thưởng) trong một ứng dụng Spring Boot.
+   * Tạo giao diện React hoặc React Native cơ bản để tương tác với API.
 
-2. **Phase 2: Microservice Extraction & Dockerization**
-   * Split the monolith into `User/XP Service` and `Quest Service`.
-   * Set up Spring Cloud Gateway and Docker Compose.
+2. **Giai đoạn 2: Tách microservice và đóng gói bằng Docker**
+   * Tách ứng dụng thành `User/XP Service` và `Quest Service`.
+   * Thiết lập Spring Cloud Gateway và Docker Compose.
 
-3. **Phase 3: Event-Driven & Async Logic**
-   * Integrate Kafka for asynchronous events (`QuestCompletedEvent` $\rightarrow$ `User XP Update` & `Notification`).
+3. **Giai đoạn 3: Xử lý hướng sự kiện và bất đồng bộ**
+   * Tích hợp Kafka cho các sự kiện bất đồng bộ (`QuestCompletedEvent` $\rightarrow$ `User XP Update` và `Notification`).
 
-4. **Phase 4: Kubernetes & DevOps Infrastructure**
-   * Write Kubernetes manifests / Helm charts.
-   * Set up Prometheus, Grafana, and CI/CD automation pipelines.
+4. **Giai đoạn 4: Kubernetes và hạ tầng DevOps**
+   * Viết Kubernetes manifest / Helm chart.
+   * Thiết lập Prometheus, Grafana và các quy trình CI/CD tự động.
