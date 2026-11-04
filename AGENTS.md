@@ -36,14 +36,30 @@ File này chứa toàn bộ các chỉ dẫn, quy tắc và nguyên tắc bắt 
 ## 📜 4. Quy tắc Code (Coding Standards & Guidelines)
 
 ### A. Backend (Java Spring Boot)
-1. **Kiến trúc Clean Architecture / Layered Architecture:**
-   * Chia rõ: `controller` $\rightarrow$ `service` $\rightarrow$ `repository` $\rightarrow$ `entity/domain` $\rightarrow$ `dto`.
-   * **Bắt buộc dùng DTO:** Tuyệt đối không trả về JPA Entity trực tiếp tại Controller Layer. Dùng MapStruct hoặc Record DTOs.
-2. **Xử lý Bất đồng bộ & Microservices:**
+
+> Chi tiết đầy đủ: [docs/architecture/software-architecture.md](docs/architecture/software-architecture.md).
+
+1. **Kiến trúc Hexagonal (Ports & Adapters):** mỗi service chia package như sau.
+   ```
+   domain/          aggregate, value object, domain service, domain event
+   application/     use case (port in) + port/out (interface nghiệp vụ tự định nghĩa)
+   adapters/        in/web, out/persistence, out/messaging, out/time
+   ```
+   * **Chiều phụ thuộc hướng vào trong:** `adapters` $\rightarrow$ `application` $\rightarrow$ `domain`.
+   * `domain` và `application` **không được import** Spring, JPA, Kafka.
+   * **Port thuộc tầng nghiệp vụ:** interface `port/out` nằm trong `application`, không nằm cạnh code hạ tầng. Adapter phải `implements` chúng.
+   * **Không dùng JPA Entity làm domain object.** Mỗi aggregate có hai biểu diễn: domain object thuần ở `domain/`, JPA entity ở `adapters/out/persistence/`, mapping bằng MapStruct.
+   * **Bắt buộc dùng DTO:** Tuyệt đối không trả về JPA Entity hay domain object trực tiếp tại Controller. Dùng MapStruct hoặc Record DTOs.
+2. **Mô hình domain theo DDD (tactical):**
+   * Toàn bộ luật nghiệp vụ (BR-01..BR-24 trong [docs/product/requirements.md](docs/product/requirements.md)) nằm trong `domain/`, **không** rải ở controller, use case hay adapter.
+   * Dùng Aggregate Root làm cửa duy nhất thay đổi trạng thái; Value Object gói invariant (ví dụ `Gold` không âm); Domain Service cho logic liên-aggregate.
+   * Value Object không có bảng riêng — map thành cột trên bảng của Entity sở hữu.
+   * Hai aggregate khác nhau tham chiếu nhau bằng **id**, không ôm object.
+3. **Xử lý Bất đồng bộ & Microservices:**
    * Dùng **Kafka Events** cho giao tiếp inter-service giữa các domain độc lập (VD: `QuestCompletedEvent`).
-   * Sử dụng `@Transactional` chính xác tại Service layer. Xử lý Exception tập trung tại `@RestControllerAdvice`.
-3. **Code Style:**
-   * Java 17+ (ưu tiên dùng `record`, `var` đúng chỗ, Pattern Matching).
+   * Sử dụng `@Transactional` chính xác tại tầng `application` (use case). Xử lý Exception tập trung tại `@RestControllerAdvice`.
+4. **Code Style:**
+   * Java 21 (ưu tiên dùng `record`, `var` đúng chỗ, Pattern Matching).
    * Tuân thủ Naming convention: CamelCase cho biến/hàm, PascalCase cho Class, SNAKE_CASE cho Constants.
 
 ### B. Frontend (React / React Native)

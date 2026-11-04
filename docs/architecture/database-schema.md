@@ -21,8 +21,9 @@ Hồ sơ người dùng. Tên `app_user` vì `user` là từ khóa Postgres.
 | Cột | Kiểu | Ràng buộc | Ghi chú |
 | --- | --- | --- | --- |
 | id | uuid | PK | |
-| email | varchar(255) | NOT NULL, UNIQUE | |
-| display_name | varchar(100) | NOT NULL | |
+| keycloak_id | uuid | NOT NULL, UNIQUE | `sub` của token Keycloak; dùng cho JIT provisioning. Không lưu password (Keycloak giữ). |
+| email | varchar(255) | NOT NULL, UNIQUE | Lấy từ claim token |
+| display_name | varchar(100) | NOT NULL | Lấy từ claim token lúc tạo |
 | timezone | varchar(64) | NOT NULL | IANA, ví dụ `Asia/Ho_Chi_Minh` — BR-14 |
 | created_at | timestamptz | NOT NULL, default now() | |
 | updated_at | timestamptz | NOT NULL, default now() | |
@@ -108,19 +109,19 @@ Index: `(user_id, is_active)`.
 ### `quest.quest_instance`
 Lần xuất hiện theo ngày — đơn vị người dùng hoàn thành (BR-18).
 
-| Cột | Kiểu | Ràng buộc | Ghi chú |
-| --- | --- | --- | --- |
-| id | uuid | PK | |
-| template_id | uuid | NOT NULL, FK → quest_template(id) | |
-| user_id | uuid | NOT NULL | Denormalize để query theo user + ngày |
-| scheduled_date | date | NOT NULL | Ngày instance thuộc về — BR-13 |
-| status | varchar(10) | NOT NULL, default 'PENDING', CHECK IN ('PENDING','COMPLETED','FAILED') | FAILED = tự đóng khi quá hạn — BR-22 |
-| difficulty_snapshot | varchar(10) | NOT NULL, CHECK IN ('EASY','MEDIUM','HARD') | Chụp lúc sinh; instance đã xong bất biến — BR-23 |
-| xp_awarded | int | NULL | Ghi lúc hoàn thành — BR-04 |
-| gold_awarded | int | NULL | Ghi lúc hoàn thành — BR-04 |
-| completed_at | timestamptz | NULL | Chỉ lưu vết — BR-13 |
-| created_at | timestamptz | NOT NULL, default now() | |
-| updated_at | timestamptz | NOT NULL, default now() | |
+| Cột                  | Kiểu        | Ràng buộc                                                              | Ghi chú                                          |
+| -------------------- | ----------- | ---------------------------------------------------------------------- | ------------------------------------------------ |
+| id                   | uuid        | PK                                                                     |                                                  |
+| template\_id         | uuid        | NOT NULL, FK → quest\_template(id)                                     |                                                  |
+| user\_id             | uuid        | NOT NULL                                                               | Denormalize để query theo user + ngày            |
+| scheduled\_date      | date        | NOT NULL                                                               | Ngày instance thuộc về — BR-13                   |
+| status               | varchar(10) | NOT NULL, default 'PENDING', CHECK IN ('PENDING','COMPLETED','FAILED') | FAILED = tự đóng khi quá hạn — BR-22             |
+| difficulty\_snapshot | varchar(10) | NOT NULL, CHECK IN ('EASY','MEDIUM','HARD')                            | Chụp lúc sinh; instance đã xong bất biến — BR-23 |
+| xp\_awarded          | int         | NULL                                                                   | Ghi lúc hoàn thành — BR-04                       |
+| gold\_awarded        | int         | NULL                                                                   | Ghi lúc hoàn thành — BR-04                       |
+| completed\_at        | timestamptz | NULL                                                                   | Chỉ lưu vết — BR-13                              |
+| created\_at          | timestamptz | NOT NULL, default now()                                                |                                                  |
+| updated\_at          | timestamptz | NOT NULL, default now()                                                |                                                  |
 
 Ràng buộc: UNIQUE `(template_id, scheduled_date)` — một instance mỗi ngày mỗi template (BR-24).
 
@@ -169,3 +170,4 @@ Streak tính ở quest-service vì phụ thuộc hoàn thành Quest; lắng nghe
 2. **Đã chốt:** `recurrence_config` là một cột jsonb linh hoạt cho MVP; hình dạng JSON cụ thể của WEEKLY/CUSTOM sẽ định nghĩa khi hiện thực lịch tùy chỉnh.
 3. **Đã chốt:** sinh toàn bộ instance ngay lúc tạo template, tối đa 1 năm (BR-19).
 4. **Đã chốt:** `user_streak` và `category` đặt ở schema `quest`.
+5. **Đã chốt:** không đồng bộ hóa cột audit giữa các bảng. Mỗi bảng khai báo `created_at` / `updated_at` theo đúng nhu cầu của nó (ví dụ `user_progress` và `user_streak` chỉ có `updated_at`; `reward_redemption` chỉ có `redeemed_at` vì bất biến — BR-09). Phía JPA có thể dùng `@MappedSuperclass` + JPA Auditing cho nhóm bảng có đủ cả hai cột, nhưng đó là chi tiết của `adapters/out/persistence`, không áp đặt lên schema hay domain.
